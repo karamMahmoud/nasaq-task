@@ -8,6 +8,8 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { map, tap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 
+import {Hero} from './hero.model'
+
 @Injectable()
 export class HerosService {
     heros = [
@@ -18,7 +20,7 @@ export class HerosService {
     constructor(private http: HttpClient) { }
 
 
-    getHeros(): Observable<any> {
+    getHeros(): Observable<Hero[]> {
         return of(this.heros);
 
         //in case we have backEnd and restful apis

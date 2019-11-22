@@ -8,7 +8,7 @@ import { HeroProfile } from './hero-profile.model'
   styleUrls: ['./hero-profile.component.scss']
 })
 export class HeroProfileComponent implements OnInit {
-  heroProfile:HeroProfile;
+  heroProfile: HeroProfile;
 
   constructor(private _HeroProfileService: HeroProfileService) {
   }
