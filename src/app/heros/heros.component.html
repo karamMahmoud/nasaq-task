@@ -1,0 +1,40 @@
+<div class="container mr-t70">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-2">
+            <div class="form-group has-feedback has-search">
+                <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                <input type="text" placeholder="search" class="form-control" [(ngModel)]="searchTerm">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <span class="toggle-title">sorted by power</span>
+            <label class="switch">
+                <input type="checkbox" (ngModelChange)="sortTable()" [(ngModel)]="switchTerm">
+                <span class="slider round"></span>
+            </label>
+            <span class="toggle-title">sorted by Name</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Completed</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let hero of heros | herosFilter:searchTerm:switchTerm" routerLink="/hero-profile">
+                        <td>{{hero.name}}</td>
+                        <td>{{hero.powers}}</td>
+                        <td>
+                            <rating [(ngModel)]="hero.rate" max="5" readonly="true"></rating>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
