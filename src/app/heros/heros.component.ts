@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HerosService } from './heros.service';
-import { Hero } from './hero.model'
+import { Hero } from './hero.model';
+import { OnDestroy } from "@angular/core";
 
 
 @Component({
@@ -8,10 +9,11 @@ import { Hero } from './hero.model'
   templateUrl: './heros.component.html',
   styleUrls: ['./heros.component.scss']
 })
-export class HerosComponent implements OnInit {
+export class HerosComponent implements OnInit, OnDestroy {
   searchTerm: string;
   switchTerm: boolean = true;
   heros:Hero[];
+  sub1:any;
 
   constructor(private _HerosService: HerosService) {
   }
@@ -22,7 +24,7 @@ export class HerosComponent implements OnInit {
   }
 
   getHeros() {
-    this._HerosService.getHeros().subscribe(data => {
+    this.sub1 = this._HerosService.getHeros().subscribe(data => {
       this.heros = data;
     }, (err) => {
       return;
@@ -61,5 +63,10 @@ export class HerosComponent implements OnInit {
     }
     return comparison;
   }
+
+  ngOnDestroy() {
+    this.sub1.unsubscribe();
+ }
+
 
 }
